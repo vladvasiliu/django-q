@@ -380,7 +380,7 @@ def worker(task_queue, result_queue, timer, timeout=Conf.TIMEOUT):
                 res = f(*task['args'], **task['kwargs'])
                 result = (res, True)
             except Exception as e:
-                result = ('{} : {}'.format(e, traceback.format_exc()), False)
+                result = ((e, '{} : {}'.format(e, traceback.format_exc())), False)
                 if error_reporter:
                     error_reporter.report()
         with timer.get_lock():
